@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="new_post_wrap">
+    <h1>書き込む</h1>
+    <%= form_for @post do |f| %>
+      <div class="textarea_wrap">
+        <%= f.text_area :title, placeholder: "タイトルを入力" %>
+      </div>
+      <div class="textarea_wrap">
+        <%= f.text_area :tweet, placeholder: "つぶやこう！" %>
+      </div>
+      <div class="field">
+      　<%= f.label :category, "カテゴリー" %>
+        　<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %> 
+            <%= category.label do %>
+            <%= category.check_box %>
+            <%= category.text %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="btn_wrap">
+        <%= f.submit "送信" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="container">
+  <ul class="posts">
+    <li>
+      <div class="title">
+        <p><%= @post.title %>のスレッドです</p>
+      </div>
+      <div class="user">
+        <p><%= @post.user.name %></p>
+      </div>
+      <div class="tweet">
+        <p><%= @post.tweet %></p>
+      </div>
+      <div class="reply">
+        <% @post.post_comments.each do |post_comment| %>
+        <div class="user">
+          <%= post_comment.user.name %>
+        </div>
+        <div class="comment">
+          <%= post_comment.comment %>
+        </div>
+        <% end %>
+      </div>
+      <div class="text_wrap">
+        <%= form_for @post.post_comments.new, url: comment_post_path(@post) do |f| %>
+          <div class="field">
+            <%= f.text_field :comment, id: "post-comment-#{@post.id}", placeholder: "コメントを入力" %>
+            <%= f.submit "送信" %>
+          </div>
+        <% end %>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>掲示板</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+  </head>
+  <body class="logined">
+    <header class="global_header">
+      <%= link_to top_path do %>
+        <h1 class="logo">掲示板</h1>
+      <% end %>
+      <form class="search">
+        <input type="text" placeholder="検索ワードを入力" name="word" value="">
+      </form>
+      <ul class="menu">
+        <li>
+          <%= link_to sign_out_path do %>
+            <i class="fa fa-sign-out">ログアウト</i>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_post_path do %>
+            <i class="fa fa-upload">投稿する</i>
+          <% end %>
+        </li>
+      </ul>
+    </header>
+    <% flash.each do |type, message| %>
+    <div class="alert alert-<%= type %>"><%= message %></div>
+    <% end %>
+    <%= yield %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      window.setTimeout(function() {
+          $(".alert").slideUp();
+      }, 3000);
+    </script>
+  </body>
+</html>
